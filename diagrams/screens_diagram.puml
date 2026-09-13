@@ -1,0 +1,90 @@
+@startuml
+!theme plain
+title "Диаграмма классов - Экраны"
+
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FEFEFE
+skinparam class {
+    BackgroundColor #E8F5E9
+    BorderColor #388E3C
+    ArrowColor #388E3C
+}
+
+class "AddReportScreen" {
+  + State createState()
+}
+
+class "AnalyticsScreen" {
+  + State createState()
+}
+
+class "ContractorTopScreen" {
+  + State createState()
+}
+
+class "ContractorDetailScreen" {
+  + String contractorId
+  + String contractorName
+  + Widget build()
+}
+
+class "ContractorScreen" {
+  + String? selectedCategory
+  + State createState()
+}
+
+class "HomeScreen" {
+  + State createState()
+}
+
+class "MainScreen" {
+  + State createState()
+}
+
+class "NotificationsScreen" {
+  + State createState()
+}
+
+class "ObjectInfoScreen" {
+  + String objectId
+  + String objectName
+  + State createState()
+}
+
+class "ProfileScreen" {
+  + State createState()
+}
+
+class "ReportScreen" {
+  + State createState()
+}
+
+class "ReportInfoScreen" {
+  + DefectModel defect
+  + State createState()
+}
+
+class "SettingsScreen" {
+  + State createState()
+}
+
+' Наследование
+StatefulWidget <|-- AddReportScreen
+StatefulWidget <|-- AnalyticsScreen
+StatefulWidget <|-- ContractorTopScreen
+StatefulWidget <|-- ContractorScreen
+StatefulWidget <|-- HomeScreen
+StatefulWidget <|-- MainScreen
+StatefulWidget <|-- NotificationsScreen
+StatefulWidget <|-- ObjectInfoScreen
+StatefulWidget <|-- ProfileScreen
+StatefulWidget <|-- ReportScreen
+StatefulWidget <|-- ReportInfoScreen
+StatefulWidget <|-- SettingsScreen
+
+StatelessWidget <|-- ContractorDetailScreen
+
+' Связь
+ReportInfoScreen --> DefectModel
+
+@enduml

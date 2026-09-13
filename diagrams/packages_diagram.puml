@@ -1,0 +1,62 @@
+@startuml
+!theme plain
+title "Диаграмма пакетов"
+
+skinparam package {
+    BackgroundColor #F5F5F5
+    BorderColor #333333
+    FontColor #333333
+    FontStyle bold
+}
+
+' ========== ПАКЕТ ЭКРАНОВ ==========
+package "screens" #E8F5E9 {
+    class AddReportScreen
+    class ReportScreen
+    class ReportInfoScreen
+    class MainScreen
+    class AnalyticsScreen
+    class HomeScreen
+    class ProfileScreen
+    class SettingsScreen
+    class NotificationsScreen
+    class ContractorScreen
+    class ContractorTopScreen
+    class ContractorDetailScreen
+    class ObjectInfoScreen
+}
+
+' ========== ПАКЕТ ВИДЖЕТОВ ==========
+package "widgets" #F3E5F5 {
+    class ReportCard
+    class DefectMarkerEditor
+}
+
+' ========== ПАКЕТ СЕРВИСОВ ==========
+package "services" #FFF3E0 {
+    class AuthService
+    class LocalStorageService
+    class NotificationService
+    class AnalyticsService
+    class RatingService
+    class StatusService
+}
+
+' ========== ПАКЕТ МОДЕЛЕЙ ==========
+package "models" #E1F5FE {
+    class DefectModel
+    class UserModel
+    class ObjectModel
+    class LocationModel
+    class NotificationModel
+    class AnalyticsModel
+    class DefectHistoryModel
+}
+
+' ========== СВЯЗИ МЕЖДУ ПАКЕТАМИ ==========
+screens --> services : uses
+screens --> widgets : uses
+services --> models : depends on
+widgets --> models : displays
+
+@enduml

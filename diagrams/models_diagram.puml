@@ -1,0 +1,132 @@
+@startuml
+!theme plain
+set namespaceSeparator ::
+
+' ========== МОДЕЛИ ДАННЫХ ==========
+
+class AnalyticsModel {
+  +int totalDefects
+  +int newDefects
+  +int inProgressDefects
+  +int closedDefects
+  +int criticalDefects
+  +int totalLocations
+  +Map<String, int> defectsByCategory
+  +Map<String, int> defectsByStatus
+  +Map<String, int> defectsBySeverity
+  +Map<String, int> defectsByLocation
+}
+
+class DefectHistoryModel {
+  +String id
+  +String defectId
+  +String oldStatus
+  +String newStatus
+  +String whoChanged
+  +DateTime dateOfChange
+  +Map<String, dynamic> toFirestore()
+}
+
+class DefectModel {
+  +String id
+  +String name
+  +String description
+  +String? category
+  +String objectId
+  +String locationId
+  +String customerId
+  +String? contractorId
+  +String severity
+  +List<String> photoBefore
+  +List<String> photoAfter
+  +String status
+  +DateTime dateOfCreation
+  +DateTime? dateOfStart
+  +DateTime? dateOfCorrect
+  +DateTime? dateOfCheck
+  +DateTime? deadline
+  +int iterCount
+  +String? verificationStatus
+  {static} +List<String> categories
+  +double? reactionTimeInDays
+  +double? fixTimeInDays
+  +bool isOverdue
+  +int overdueDays
+  +Map<String, dynamic> toFirestore()
+  +DefectModel copyWith()
+}
+
+class LocationModel {
+  +String id
+  +String objectId
+  +int floor
+  +String number
+  +Map<String, dynamic> toFirestore()
+}
+
+class NotificationModel {
+  +String id
+  +String userId
+  +String title
+  +String message
+  +String type
+  +Map<String, dynamic> data
+  +DateTime createdAt
+  +bool isRead
+  +Map<String, dynamic> toFirestore()
+}
+
+class ObjectModel {
+  +String id
+  +String name
+  +String address
+  +String customerId
+  +String generalContractorId
+  +Map<String, dynamic> toFirestore()
+}
+
+class ContrReviewModel {
+  +String id
+  +String defectId
+  +String contractorId
+  +int communication
+  +int materials
+  +int workQuality
+  +DateTime createdAt
+  +double averageRating
+  +Map<String, dynamic> toFirestore()
+}
+
+class UserModel {
+  +String id
+  +String email
+  +String surname
+  +String name
+  +String patronymic
+  +String role
+  +String? companyName
+  +String? phone
+  +String category
+  +Map<String, dynamic> toFirestore()
+}
+
+' ========== СВЯЗИ МЕЖДУ МОДЕЛЯМИ ==========
+
+DefectModel ..> ObjectModel : objectId
+DefectModel ..> LocationModel : locationId
+DefectModel ..> UserModel : customerId
+DefectModel ..> UserModel : contractorId
+
+DefectHistoryModel ..> DefectModel : defectId
+
+ContrReviewModel ..> DefectModel : defectId
+ContrReviewModel ..> UserModel : contractorId
+
+ObjectModel ..> UserModel : customerId
+ObjectModel ..> UserModel : generalContractorId
+
+LocationModel ..> ObjectModel : objectId
+
+NotificationModel ..> UserModel : userId
+
+@enduml

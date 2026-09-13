@@ -1,0 +1,82 @@
+@startuml
+!theme plain
+title "Диаграмма классов - Сервисы"
+
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FEFEFE
+skinparam class {
+    BackgroundColor #FFF3E0
+    BorderColor #0288D1
+    ArrowColor #0288D1
+}
+
+class "AnalyticsService" {
+  - FirebaseFirestore _firestore
+  + dynamic getAnalytics()
+  + dynamic getUserObjects()
+}
+
+class "AuthService" {
+  - FirebaseAuth _auth
+  - FirebaseFirestore _firestore
+  + dynamic regWithEmail()
+  + dynamic signinWithEmail()
+  + dynamic signOut()
+  + User? getCurrUser()
+  + dynamic getCurrUserData()
+  + bool isAuthenticated()
+  + dynamic getCurrUserRole()
+  + dynamic updateUserProfile()
+  + dynamic updateAvatarPath()
+}
+
+class "LocalObjectsService" {
+  + dynamic getPhoto()
+  + dynamic hasPhoto()
+}
+
+class "LocalStorageService" {
+  - ImagePicker _picker
+  - dynamic _localPath
+  + dynamic pickImageFromGallery()
+  + dynamic pickImageFromCamera()
+  + dynamic savePhoto()
+  + dynamic getPhoto()
+  + dynamic deletePhoto()
+}
+
+class "NotificationService" {
+  - FirebaseFirestore _firestore
+  + dynamic sendNotification()
+  + Stream<List> getUserNotifications()
+  + dynamic markAsRead()
+  + dynamic markAllAsRead()
+  + Stream<int> getUnreadCount()
+}
+
+class "RatingService" {
+  {static} + double calculateRating()
+  {static} + dynamic calculateRatingByContractorId()
+  {static} + double toRating5()
+  {static} + double toRating100()
+  {static} + String getRatingText()
+  {static} + Color getRatingColor()
+}
+
+class "StatusService" {
+  {static} + List<String> allStatuses
+  {static} + String getStatusText()
+  {static} + Color getStatusColor()
+  {static} + List<String> getAvailableStatuses()
+  {static} + bool canChangeStatus()
+  {static} + dynamic updateStatus()
+}
+
+' Связи
+AnalyticsService --> FirebaseFirestore
+AuthService --> FirebaseAuth
+AuthService --> FirebaseFirestore
+LocalStorageService --> ImagePicker
+NotificationService --> FirebaseFirestore
+
+@enduml

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "117621637260",
+    "project_id": "diplomgrinenko",
+    "storage_bucket": "diplomgrinenko.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117621637260:android:6d74ba1b30ba7ec38bfba9",
+        "android_client_info": {
+          "package_name": "com.diplom.diplomgrinenko"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq3za5MGHvW4x_1YKBPBCSNWlWr098lRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
